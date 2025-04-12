@@ -68,7 +68,7 @@ nav {
 .nav-links a {
     color: white;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.3rem;
     transition: color 0.3s;
 }
 
@@ -76,28 +76,63 @@ nav {
     color: #c39b6d;
 }
 
-/* Hamburger Menu (Visible on Mobile) */
+/* Hamburger Menu (Hidden on Desktop) */
 .hamburger {
-    display: block;
+    display: none;
     cursor: pointer;
     color: white;
     font-size: 1.5rem;
     z-index: 1002;
 }
 
-/* Mobile Menu (When Active) */
+/* Mobile Menu Styles */
 @media (max-width: 768px) {
+    /* Hide regular nav links on mobile */
+    .nav-links {
+        display: none;
+    }
+    
+    /* Show hamburger on mobile */
+    .hamburger {
+        display: block;
+    }
+    
+    /* Mobile menu when active */
     .nav-links.active {
         display: flex;
         flex-direction: column;
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 250px; /* Adjust width as needed */
+        background: brown;
+        padding: 2rem 1rem;
+        gap: 1.5rem;
+        text-align: left;
+        z-index: 1001;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .nav-links.active.show {
+        transform: translateX(0);
+    }
+    
+    /* Optional: Add overlay for the rest of the page */
+    .overlay {
+        position: fixed;
+        top: 0;
         left: 0;
         right: 0;
-        background: brown;
-        padding: 1rem;
-        gap: 1rem;
-        text-align: center;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: none;
+    }
+    
+    .overlay.show {
+        display: block;
     }
 }
 

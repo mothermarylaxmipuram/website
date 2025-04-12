@@ -1,10 +1,17 @@
-// script.js
-document.addEventListener('DOMContentLoaded', function () {
-    const hamburger = document.querySelector('.hamburger');
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('nav-links');
-
-    hamburger.addEventListener('click', function () {
-        navLinks.classList.toggle('active'); // Toggle the active class
+    const overlay = document.getElementById('overlay');
+    
+    hamburger.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+        navLinks.classList.toggle('show');
+        overlay.classList.toggle('show');
+    });
+    
+    overlay.addEventListener('click', function() {
+        navLinks.classList.remove('show');
+        overlay.classList.remove('show');
     });
 });
 

@@ -4,13 +4,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const overlay = document.getElementById('overlay');
     
     hamburger.addEventListener('click', function() {
-        navLinks.classList.toggle('active');
-        navLinks.classList.toggle('show');
-        overlay.classList.toggle('show');
+        // Always check the current state and set explicitly instead of toggle
+        if (navLinks.classList.contains('show')) {
+            navLinks.classList.remove('show', 'active');
+            overlay.classList.remove('show');
+        } else {
+            navLinks.classList.add('show', 'active');
+            overlay.classList.add('show');
+        }
     });
     
     overlay.addEventListener('click', function() {
-        navLinks.classList.remove('show');
+        navLinks.classList.remove('show', 'active');
         overlay.classList.remove('show');
     });
 });

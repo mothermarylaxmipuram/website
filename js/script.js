@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('nav-links');
     const overlay = document.getElementById('overlay');
+    const navItems = document.querySelectorAll('#nav-links a'); // Select all nav links
     
     hamburger.addEventListener('click', function() {
-        // Always check the current state and set explicitly instead of toggle
         if (navLinks.classList.contains('show')) {
             navLinks.classList.remove('show', 'active');
             overlay.classList.remove('show');
@@ -17,6 +17,14 @@ document.addEventListener('DOMContentLoaded', function() {
     overlay.addEventListener('click', function() {
         navLinks.classList.remove('show', 'active');
         overlay.classList.remove('show');
+    });
+    
+    // Add click event to each nav link
+    navItems.forEach(item => {
+        item.addEventListener('click', function() {
+            navLinks.classList.remove('show', 'active');
+            overlay.classList.remove('show');
+        });
     });
 });
 

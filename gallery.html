@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gallery of Our Lady of Good Health Church in Lakshmipuram, Chennai - View photos of our church events and activities.">
+    <title>Gallery - Arokia Matha Aalayam, Lakshmipuram</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Main Color Theme */
+        :root {
+            --primary-color: brown;
+            --secondary-color: darkred;
+            --light-bg: rgba(255, 0, 0, 0.1);
+            --text-color: #333;
+            --white: #fff;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Header Section */
+        .gallery-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/pattern.png') repeat;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .gallery-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .breadcrumb {
+            background: transparent;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .breadcrumb-item a {
+            color: var(--white);
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item.active {
+            color: #f0f0f0;
+        }
+        
+        /* Gallery Container */
+        .gallery-container {
+            padding: 0 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            background-color: var(--white);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .gallery-img-container {
+            position: relative;
+            overflow: hidden;
+            height: 250px;
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            padding: 15px;
+            background-color: var(--white);
+            border-top: 3px solid var(--primary-color);
+        }
+        
+        .gallery-caption h3 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .gallery-caption p {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        /* Lightbox Overlay */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 90vh;
+            border: 3px solid var(--white);
+            box-shadow: 0 0 20px rgba(0,0,0,0.6);
+        }
+        
+        .lightbox-caption {
+            color: var(--white);
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .lightbox-close:hover {
+            color: var(--secondary-color);
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+        }
+        
+        .lightbox-prev, .lightbox-next {
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            background-color: rgba(0,0,0,0.5);
+            padding: 10px 15px;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .lightbox-prev:hover, .lightbox-next:hover {
+            background-color: var(--primary-color);
+        }
+        
+        /* Section Divider */
+        .section-divider {
+            border: none;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 40px auto;
+            width: 80px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-header {
+                padding: 40px 0;
+            }
+            
+            .gallery-title {
+                font-size: 2rem;
+            }
+            
+            .gallery-img-container {
+                height: 200px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="gallery-header">
+        <div class="container">
+            <h1 class="gallery-title">Our Events Gallery</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Gallery</li>
+                </ol>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Gallery Content -->
+    <main class="gallery-container">
+        <!-- Gallery Grid -->
+        <div class="gallery-grid">
+            <!-- Gallery Item 1 -->
+            <div class="gallery-item" onclick="openLightbox('images/img1.jpg', 'Church Celebration')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img1.jpg" alt="Church Celebration" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Church Celebration</h3>
+                    <p>Annual feast celebration 2023</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 2 -->
+            <div class="gallery-item" onclick="openLightbox('images/img2.JPG', 'Mass Service')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img2.JPG" alt="Mass Service" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Mass Service</h3>
+                    <p>Sunday morning service</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 3 -->
+            <div class="gallery-item" onclick="openLightbox('images/img3.JPG', 'Choir Performance')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img3.JPG" alt="Choir Performance" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Choir Performance</h3>
+                    <p>Christmas carol performance</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 4 -->
+            <div class="gallery-item" onclick="openLightbox('images/img4.JPG', 'Baptism Ceremony')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img4.JPG" alt="Baptism Ceremony" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Baptism Ceremony</h3>
+                    <p>Infant baptism ceremony</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 5 -->
+            <div class="gallery-item" onclick="openLightbox('images/img5.JPG', 'First Communion')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img5.JPG" alt="First Communion" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>First Communion</h3>
+                    <p>Children's first communion</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 6 -->
+            <div class="gallery-item" onclick="openLightbox('images/img6.JPG', 'Confirmation')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img6.JPG" alt="Confirmation" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Confirmation</h3>
+                    <p>Confirmation ceremony</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 7 -->
+            <div class="gallery-item" onclick="openLightbox('images/img7.JPG', 'Wedding Ceremony')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img7.JPG" alt="Wedding Ceremony" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Wedding Ceremony</h3>
+                    <p>Church wedding celebration</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 8 -->
+            <div class="gallery-item" onclick="openLightbox('images/img8.JPG', 'Youth Group')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img8.JPG" alt="Youth Group" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Youth Group</h3>
+                    <p>Youth group activities</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 9 -->
+            <div class="gallery-item" onclick="openLightbox('images/img9.JPG', 'Christmas Celebration')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img9.JPG" alt="Christmas Celebration" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Christmas Celebration</h3>
+                    <p>Christmas midnight mass</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 10 -->
+            <div class="gallery-item" onclick="openLightbox('images/img10.JPG', 'Easter Service')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img10.JPG" alt="Easter Service" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Easter Service</h3>
+                    <p>Easter Sunday celebration</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 11 -->
+            <div class="gallery-item" onclick="openLightbox('images/img11.JPG', 'Church Choir')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img11.JPG" alt="Church Choir" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Church Choir</h3>
+                    <p>Choir practice session</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 12 -->
+            <div class="gallery-item" onclick="openLightbox('images/img12.jpg', 'Bible Study')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img12.png" alt="Bible Study" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Bible Study</h3>
+                    <p>Weekly bible study group</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 13 -->
+            <div class="gallery-item" onclick="openLightbox('images/img13.jpg', 'Community Service')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img13.jpg" alt="Community Service" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Community Service</h3>
+                    <p>Helping the local community</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 14 -->
+            <div class="gallery-item" onclick="openLightbox('images/img14.jpg', 'Church Renovation')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img14.jpg" alt="Church Renovation" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Church Renovation</h3>
+                    <p>Church renovation work</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 15 -->
+            <div class="gallery-item" onclick="openLightbox('images/img15.jpg', 'Feast Day Procession')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img15.jpg" alt="Feast Day Procession" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Feast Day Procession</h3>
+                    <p>Annual feast day procession</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 16 -->
+            <div class="gallery-item" onclick="openLightbox('images/img16.jpg', 'Children's Program')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img16.jpg" alt="Children's Program" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Children's Program</h3>
+                    <p>Sunday school activities</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 17 -->
+            <div class="gallery-item" onclick="openLightbox('images/img17.jpg', 'Senior Citizens')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img17.png" alt="Senior Citizens" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Senior Citizens</h3>
+                    <p>Senior citizens gathering</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 18 -->
+            <div class="gallery-item" onclick="openLightbox('images/img18.jpg', 'Church Picnic')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img18.jpg" alt="Church Picnic" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Church Picnic</h3>
+                    <p>Annual church picnic</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 19 -->
+            <div class="gallery-item" onclick="openLightbox('images/img19.jpg', 'Charity Event')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img19.jpg" alt="Charity Event" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Charity Event</h3>
+                    <p>Food distribution program</p>
+                </div>
+            </div>
+
+            <!-- Gallery Item 20 -->
+            <div class="gallery-item" onclick="openLightbox('images/img20.jpg', 'Prayer Meeting')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img20.png" alt="Prayer Meeting" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Prayer Meeting</h3>
+                    <p>Weekly prayer meeting</p>
+                </div>
+            </div>
+             <!-- Gallery Item 21 -->
+             <div class="gallery-item" onclick="openLightbox('images/img20.jpg', 'Prayer Meeting')">
+                <div class="gallery-img-container">
+                    <img src="gallery/img21.png" alt="Prayer Meeting" class="gallery-img">
+                </div>
+                <div class="gallery-caption">
+                    <h3>Prayer Meeting</h3>
+                    <p>Weekly prayer meeting</p>
+                </div>
+        </div>
+         <!-- Gallery Item 22 -->
+         <div class="gallery-item" onclick="openLightbox('images/img20.jpg', 'Prayer Meeting')">
+            <div class="gallery-img-container">
+                <img src="gallery/img22.jpg" alt="Prayer Meeting" class="gallery-img">
+            </div>
+            <div class="gallery-caption">
+                <h3>Prayer Meeting</h3>
+                <p>Weekly prayer meeting</p>
+            </div>
+
+        <hr class="section-divider">
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-nav">
+            <span class="lightbox-prev" onclick="changeImage(-1)">&#10094;</span>
+            <span class="lightbox-next" onclick="changeImage(1)">&#10095;</span>
+        </div>
+        <div class="lightbox-content">
+            <img id="lightbox-img" class="lightbox-img" src="" alt="">
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+        </div>
+    </div>
+
+   
+</body>
+</html>

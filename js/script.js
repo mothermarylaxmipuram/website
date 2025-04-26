@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const anbiyansCount = document.querySelector('.count-item:nth-child(2) .count');
     const anbiyansTotalCount = document.querySelector('.count-item:nth-child(3) .count');
 
-    animateCount(familyCount, 550, 2000); // Animate to 550 in 2 seconds
+    animateCount(familyCount, 600, 2000); // Animate to 550 in 2 seconds
     animateCount(anbiyansCount, 2600, 2000); // Animate to 2200 in 2 seconds
     animateCount(anbiyansTotalCount, 23, 2000); // Animate to 19 in 2 seconds
 });

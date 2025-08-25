@@ -573,6 +573,13 @@ nav {
     margin: 0 auto;  /* centers the image */
 }
 
+.jubilee-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #800000;  /* maroon or your preferred color */
+    margin-bottom: 10px;
+}
 
 @media (max-width: 768px) {
     .priests-container {

@@ -566,12 +566,10 @@ nav {
     border-radius: 10px; /* Rounded corners */
 }
 
-.priest-profile.jubilee-profile1 img {
-    width: 1280px;   /* fixed width */
-    height: 905px;   /* fixed height */
-    object-fit: contain; /* ensures full image fits without cutting */
+.jubilee-full img {
+    width: 100%;          /* take full browser width */
+    height: auto;         /* keep aspect ratio (1280x905) */
     display: block;
-    margin: 0 auto;  /* centers the image */
 }
 
 @media (max-width: 768px) {

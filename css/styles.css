@@ -567,10 +567,12 @@ nav {
 }
 
 .jubilee-full img {
-    width: 100%;          /* take full browser width */
-    height: auto;         /* keep aspect ratio (1280x905) */
+    width: 80%;      /* reduce size (you can try 80%, 85%, etc.) */
+    height: auto;    /* keeps the aspect ratio */
     display: block;
+    margin: 0 auto;  /* centers the image */
 }
+
 
 @media (max-width: 768px) {
     .priests-container {

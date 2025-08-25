@@ -581,6 +581,16 @@ nav {
     margin-bottom: 10px;
 }
 
+/* For mobile screens */
+@media (max-width: 768px) {
+    .jubilee-full img {
+        width: 100%;   /* full width on mobile */
+    }
+    .jubilee-title {
+        font-size: 22px; /* slightly smaller text for mobile */
+    }
+}
+
 @media (max-width: 768px) {
     .priests-container {
         flex-direction: column; /* Stack profiles vertically */

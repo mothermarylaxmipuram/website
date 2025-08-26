@@ -28,6 +28,28 @@
     <!-- Link to JavaScript -->
     <script src="js/script.js"></script>
 </head>
+<!-- Popup -->
+<div class="popup-overlay" id="popup">
+    <div class="popup-box">
+      <button class="close-btn" onclick="closePopup()">X</button>
+      <img src="images/notice.jpg" alt="Popup Image">
+    </div>
+  </div>
+  
+  <script>
+    // Show popup after 5 seconds
+    window.onload = function() {
+      setTimeout(function() {
+        document.getElementById("popup").style.display = "flex";
+      }, 5000);
+    };
+  
+    // Close popup
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+  </script>
+  
 <body>
     <nav>
         <!-- Logo and Church Name Container -->
@@ -77,7 +99,7 @@
     <!-- Marquee Section -->
 <div class="marquee-section">
     <div class="marquee-text">
-        Thank You Lord for the Blood. Thank You Lord for the Cross. Thank you Lord for 50 Years of Grace.
+        Thank You Lord for the Blood. Thank You Lord for the Cross. Thank you Lord for 58 Years of Grace.
     </div>
 </div>
 
